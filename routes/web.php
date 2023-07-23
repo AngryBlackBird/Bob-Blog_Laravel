@@ -35,5 +35,4 @@ Route::prefix("/blog")->name("blog.")->group(function () {
 
     Route::get("/edit/{slug}-{post}", [BlogController::class, "edit"])->name("edit")->where(["post" => "[0-9]+", "slug" => "[a-z0-9\-]+"]);;
     Route::post("/edit/{slug}-{post}", [BlogController::class, "update"])->where(["post" => "[0-9]+", "slug" => "[a-z0-9\-]+"]);;
-
 });

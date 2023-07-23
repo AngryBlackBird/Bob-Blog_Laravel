@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePostRequest;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -14,10 +15,21 @@ class BlogController extends Controller
 {
     public function index(): View
     {
+//        $category1 = new Category(["name"=> "Category 1"]);
+//        $category1->save();
+//        $category2 = new Category(["name"=> "Category 2"]);
+//        $category2->save();
+//        $post = Post::find(1);
+//        $post->tags()->createMany([
+//            ["name" => "Tag 1 "],
+//            ["name" => "Tag 2 "],
+//        ]);
+//        $post->save();
+        dd($post->tags);
+
         $posts = Post::paginate(2);
         return view("blog.index", ["posts" => $posts]);
     }
-
 
     public function show(string $slug, Post $post): Application|View
     {
