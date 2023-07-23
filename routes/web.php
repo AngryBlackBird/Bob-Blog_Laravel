@@ -15,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view("welcome");
+    $posts = \App\Models\Post::offset(0)->limit(3)->get();
+
+    return view("welcome", ["posts" => $posts]);
 })->name("home");
 
 

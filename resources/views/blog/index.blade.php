@@ -2,25 +2,52 @@
 
 @section("main")
 
-    <h1>Bonjour</h1>
+    <div>
+        <div class="container mx-auto">
+            <div class="py-16 lg:py-20">
+                <div>
+                    <img src="/assets/img/icon-blog.png" alt="icon envelope"/>
+                </div>
 
-    @foreach($posts as $post)
-        <article class="max-w-sm rounded overflow-hidden shadow-lg">
-            <div class="px-6 py-4">
-                <div class="font-bold text-xl mb-2">{{ $post->title }}</div>
-                <p class="text-gray-700 text-base">
-                    {{ $post->content }}
-                    <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                       href="{{ route("blog.show", ['slug' => $post->slug, 'post'=>$post]) }}">Lire la suite</a>
-                    <a class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-                       href="{{ route("blog.edit", ['slug' => $post->slug, 'post'=>$post]) }}">Modifier l'article</a>
-                </p>
-            </div>
-            <div class="px-6 pt-4 pb-2">
-                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{$post->slug}}</span>
-            </div>
-        </article>
-    @endforeach
+                <h1 class="pt-5 font-body text-4xl font-semibold text-primary dark:text-white md:text-5xl lg:text-6xl">
+                    Blog
+                </h1>
 
-    {{$posts->links()}}
+                <div class="pt-3 sm:w-3/4">
+                    <p class="font-body text-xl font-light text-primary dark:text-white">
+                        Articles, tutorials, snippets, rants, and everything else. Subscribe for
+                        updates as they happen.
+                    </p>
+                </div>
+
+                <div class="pt-8 lg:pt-12">
+
+                    @foreach($posts as $post)
+                        <article class="border-b border-grey-lighter pb-8 mt-5">
+                        <span
+                            class="mb-4 inline-block rounded-full bg-green-light px-2 py-1 font-body text-sm text-green">{{$post->slug}}</span>
+                            <a
+                                href="{{ route("blog.show", ['slug' => $post->slug, 'post'=>$post]) }}"
+                                class="block font-body text-lg font-semibold text-primary transition-colors hover:text-green dark:text-white dark:hover:text-secondary"
+                            >{{ $post->title }}</a
+                            >
+                            <div class="flex items-center pt-4">
+                                <p class="pr-2 font-body font-light text-primary dark:text-white">
+                                    {{$post->created_at->monthName }}
+                                </p>
+                                <span class="font-body text-grey dark:text-white">//</span>
+                                <p class="pl-2 font-body font-light text-primary dark:text-white">
+                                    4 min read
+                                </p>
+                            </div>
+                        </article>
+                    @endforeach
+
+                    {{$posts->onEachSide(2)->links()}}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
