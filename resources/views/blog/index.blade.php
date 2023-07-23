@@ -5,6 +5,13 @@
     <div>
         <div class="container mx-auto">
             <div class="py-16 lg:py-20">
+                <div class="flex w-full mb-4">
+                    <a href="{{route("blog.create")}}"
+                       class="group ml-3 flex cursor-pointer items-center border-2 border-primary px-3 py-1 font-body font-medium text-primary transition-colors hover:border-secondary hover:text-secondary dark:border-green-light dark:text-white dark:hover:border-secondary dark:hover:text-secondary">
+                        Créer un article
+                    </a>
+                </div>
+
                 <div>
                     <img src="/assets/img/icon-blog.png" alt="icon envelope"/>
                 </div>
@@ -21,7 +28,6 @@
                 </div>
 
                 <div class="pt-8 lg:pt-12">
-
                     @foreach($posts as $post)
                         <article class="border-b border-grey-lighter pb-8 mt-5">
                         <span

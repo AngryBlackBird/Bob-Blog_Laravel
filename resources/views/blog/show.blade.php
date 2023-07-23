@@ -2,16 +2,36 @@
 
 @section("title",$post->title)
 @section("main")
-    <div class="w-full rounded overflow-hidden shadow-lg">
-        <div class="px-6 py-4">
-            <div class="font-bold text-xl mb-2">{{ $post->title }}</div>
-            <p class="text-gray-700 text-base">
-                {{ $post->content }}
-            </p>
+    <div>
+        <div class="container mx-auto">
+            <div class="pt-16 lg:pt-20">
+                <div class="border-b border-grey-lighter pb-8 sm:pb-12">
+                    <div class="flex w-full mb-4">
+                        <a href="{{route("blog.edit", ["slug"=>$post->slug, "post"=>$post])}}"
+                           class="group ml-3 flex cursor-pointer items-center border-2 border-primary px-3 py-1 font-body font-medium text-primary transition-colors hover:border-secondary hover:text-secondary dark:border-green-light dark:text-white dark:hover:border-secondary dark:hover:text-secondary">
+                            Modifier
+                        </a>
+                    </div>
+                    <span
+                        class="mb-5 inline-block rounded-full bg-green-light px-2 py-1 font-body text-sm text-green sm:mb-8">
+                          category
+                      </span>
+                    <h2 class="block font-body text-3xl font-semibold leading-tight text-primary dark:text-white sm:text-4xl md:text-5xl">
+                        {{ $post->title }}                    </h2>
+                    <div class="flex items-center pt-5 sm:pt-8">
+                        <p class="pr-2 font-body font-light text-primary dark:text-white">
+                            {{ $post->create_at }}
+                        </p>
+                        <span class="vdark:text-white font-body text-grey">//</span>
+                        <p class="pl-2 font-body font-light text-primary dark:text-white">
+                            4 min read
+                        </p>
+                    </div>
+                </div>
+                <div class="prose prose max-w-none border-b border-grey-lighter py-8 dark:prose-dark sm:py-12">
+
+                    {{ $post->content }}
+                </div>
+            </div>
         </div>
-        <div class="px-6 pt-4 pb-2">
-        <span
-            class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{$post->slug}}</span>
-        </div>
-    </div>
 @endsection
