@@ -64,9 +64,25 @@
             @enderror
         </div>
     </div>
+    <div class="flex flex-wrap -mx-3 mb-6">
+        <div class="w-full px-3">
+            <label for="category" class="block pb-3 font-body font-medium text-primary dark:text-white">
+                Catégorie
+            </label>
+            <select id="category" name="category_id"
+                    class="w-full border border-primary bg-grey-lightest px-5 py-4 font-body font-light text-primary placeholder-primary transition-colors focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary dark:text-white">
+                @foreach($categories as $category)
+                    <option
+                        @selected(old("category_id", $post->category_id === $category->id)) value="{{$category->id}}">{{$category->name}}</option>
+                @endforeach
+            </select>
+            @error("category_id")
+            <p class="text-red-600 text-xs italic">{{$message}}</p>
+            @enderror
+        </div>
+    </div>
     <button type="submit"
-            class="mt-5 mb-12 block bg-secondary px-10 py-4 text-center font-body text-xl font-semibold text-white transition-colors hover:bg-green sm:inline-block sm:text-left sm:text-2xl"
-    >
+            class="mt-5 mb-12 block bg-secondary px-10 py-4 text-center font-body text-xl font-semibold text-white transition-colors hover:bg-green sm:inline-block sm:text-left sm:text-2xl">
         @if($post->id)
             Modifier
         @else

@@ -51,6 +51,7 @@ class BlogController extends Controller
         return \view("blog.create", [
             "post" => $post,
             "tags"=> \App\Models\Tag::select("id", "name")->get(),
+            "categories" => Category::select("id", "name")->get(),
         ]);
 
     }
@@ -59,6 +60,7 @@ class BlogController extends Controller
     {
         $post->update($request->validated());
         $post->tags()->sync($request->validated('tags'));
+
         return redirect()->route('blog.show', ["slug" => $post->slug, 'post' => $post])->with("success", "Article bien modifié");
     }
 
