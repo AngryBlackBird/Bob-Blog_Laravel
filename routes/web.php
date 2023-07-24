@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +14,16 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::prefix("/")->name("auth.")->group(function (){
+    Route::get("/login", [AuthController::class, "login"])->name("login");
+    Route::post("/login", [AuthController::class, "doLogin"]);
+
+    Route::get("/subscribe", [AuthController::class, "subscribe"])->name("subscribe");
+    Route::post("/subscribe", [AuthController::class, "doSubcribe"]);
+
+});
+
+
 
 Route::get('/', function () {
     $posts = \App\Models\Post::offset(0)->limit(3)->get();
@@ -22,7 +33,6 @@ Route::get('/', function () {
 
 
 Route::prefix("/blog")->name("blog.")->group(function () {
-
     Route::get('/', [BlogController::class, "index"])
         ->name('index');
 
