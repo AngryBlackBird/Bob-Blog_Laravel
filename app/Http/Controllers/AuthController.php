@@ -27,6 +27,11 @@ class AuthController extends Controller
         return to_route("auth.login")->withErrors(["email"=>"Une erreur est survenue"])->onlyInput("email");
     }
 
+    public function logout(){
+        Auth::logout();
+        return redirect()->route("auth.login");
+    }
+
     public function subscribe(): View
     {
         return view('auth.subscribe');

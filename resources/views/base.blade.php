@@ -69,7 +69,36 @@
                     </g>
                 </svg>
             </div>
-            <div class="hidden lg:block">
+            <div class="flex">
+                @auth()
+                    <div class="group relative mr-6 mb-1">
+                        <div
+                            class="absolute left-0 bottom-0 z-20 h-0 w-full opacity-75 transition-all group-hover:h-2 group-hover:bg-yellow"></div>
+                        <p class="relative z-30 block px-2 font-body text-lg font-medium text-primary transition-colors group-hover:text-green dark:text-white dark:group-hover:text-secondary">
+                            {{ Auth::user()->name }}</p>
+                    </div>
+                    <form class="group relative mr-6 mb-1" method="post" action="{{route("auth.logout")}}">
+                        @method("delete")
+                        @csrf
+                        <div
+                            class="absolute left-0 bottom-0 z-20 h-0 w-full opacity-75 transition-all group-hover:h-2 group-hover:bg-yellow"></div>
+                        <button
+                            class="relative z-30 block px-2 font-body text-lg font-medium text-primary transition-colors group-hover:text-green dark:text-white dark:group-hover:text-secondary">
+                            Se déconnecter
+                        </button>
+                    </form>
+                @endauth
+                @guest()
+                    <div
+                        class="absolute left-0 bottom-0 z-20 h-0 w-full opacity-75 transition-all group-hover:h-2 group-hover:bg-yellow"
+                    ></div>
+                    <a href="{{route("auth.login")}}"
+                       class="relative z-30 block px-2 font-body text-lg font-medium text-primary transition-colors group-hover:text-green dark:text-white dark:group-hover:text-secondary">
+                        Se connecter
+                    </a>
+                @endguest
+            </div>
+            <div class="hidden lg:block  ">
                 <ul class="flex items-center">
 
                     <li class="group relative mr-6 mb-1">
@@ -91,7 +120,6 @@
                             Blog
                         </a>
                     </li>
-
                     <li>
                         <i
                             class="bx cursor-pointer text-3xl text-primary dark:text-white"
@@ -100,6 +128,7 @@
                         ></i>
                     </li>
                 </ul>
+
             </div>
         </div>
     </div>

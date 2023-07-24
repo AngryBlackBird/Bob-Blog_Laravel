@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix("/")->name("auth.")->group(function (){
     Route::get("/login", [AuthController::class, "login"])->name("login");
     Route::post("/login", [AuthController::class, "doLogin"]);
+    Route::delete("/logout", [AuthController::class, "logout"])->name("logout");
 
     Route::get("/subscribe", [AuthController::class, "subscribe"])->name("subscribe");
     Route::post("/subscribe", [AuthController::class, "doSubcribe"]);
