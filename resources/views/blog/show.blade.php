@@ -37,6 +37,9 @@
                         </p>
                     </div>
                 </div>
+                @if($post->image)
+                    <img src="{{$post->imageUrl()}}" alt="blogImg">
+                @endif
                 <div class="prose prose max-w-none border-b border-grey-lighter py-8 dark:prose-dark sm:py-12">
                     {{ $post->content }}
                 </div>

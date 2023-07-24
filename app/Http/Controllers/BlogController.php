@@ -10,6 +10,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 
 class BlogController extends Controller
 {
@@ -56,15 +57,30 @@ class BlogController extends Controller
 
     public function update(CreatePostRequest $request, string $slug, Post $post): RedirectResponse
     {
-        $post->update($request->validated());
+
+        $post->update($this->extractData($post, $request));
         $post->tags()->sync($request->validated('tags'));
 
         return redirect()->route('blog.show', ["slug" => $post->slug, 'post' => $post])->with("success", "Article bien modifié");
     }
 
+    private function extractData(Post $post, CreatePostRequest $request): array
+    {
+        $data = $request->validated();
+        /** @var UploadedFile|null $image * */
+        $image =  $request->validated("image");
+        if ($image === null || $image->getError())
+            return $data;
+        if ($post->image)
+            \Storage::disk("public")->delete($post->image);
+
+        $data["image"] = $image->store("blog", "public");
+        return $data;
+    }
+
     public function save(CreatePostRequest $request): RedirectResponse
     {
-        $post = Post::create($request->validated());
+        $post = Post::create($this->extractData(new Post(), $request));
         return redirect()->route('blog.show', ["slug" => $post->slug, 'post' => $post])->with("success", "Article bien crée");
     }
 

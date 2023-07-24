@@ -1,4 +1,4 @@
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="flex flex-wrap -mx-3 mb-6">
         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -29,6 +29,18 @@
             <p class="text-red-600 text-xs italic">{{$message}}</p>
             @enderror
         </div>
+    </div>
+    <div class="flex flex-wrap -mx-3 mb-6">
+        <label
+            class="block pb-3 font-body font-medium text-primary dark:text-white"
+            for="image">
+            Image
+        </label>
+        <input class="w-full border border-primary bg-grey-lightest px-5 py-4 font-body font-light text-primary placeholder-primary transition-colors focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary dark:text-white"
+            id="image" type="file" name="image">
+        @error("image")
+        <p class="text-red-600 text-xs italic">{{$message}}</p>
+        @enderror
     </div>
     <div class="flex flex-wrap -mx-3 mb-6">
         <div class="w-full px-3">
