@@ -50,8 +50,6 @@ class BlogController extends Controller
     {
         return \view("blog.create", [
             "post" => $post,
-            "tags"=> \App\Models\Tag::select("id", "name")->get(),
-            "categories" => Category::select("id", "name")->get(),
         ]);
 
     }

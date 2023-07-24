@@ -45,8 +45,12 @@
                                     </p>
 
                                 <span class="font-body text-grey dark:text-white">//</span>
-                                <p class="pl-2 font-body font-light text-primary dark:text-white">
+                                <p class="pl-2 pr-2 font-body font-light text-primary dark:text-white">
                                     4 min read
+                                </p>
+                                <span class="font-body text-grey dark:text-white">//</span>
+                                <p class="pl-2 pr-2 font-body font-light text-primary dark:text-white">
+                                     {{$post->category->name ?? "Pas de catégorie"}}
                                 </p>
                             </div>
                         </article>

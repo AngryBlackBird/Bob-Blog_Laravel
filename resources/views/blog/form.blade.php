@@ -46,7 +46,8 @@
         </div>
     </div>
     @php
-        $tagIds = $post->tags()->pluck("id");
+            $tags= \App\Models\Tag::select("id", "name")->get();
+            $tagIds = $post->tags()->pluck("id");
     @endphp
     <div class="flex flex-wrap -mx-3 mb-6">
         <div class="w-full px-3">
@@ -64,6 +65,9 @@
             @enderror
         </div>
     </div>
+    @php
+        $categories= \App\Models\Category::select("id", "name")->get();
+    @endphp
     <div class="flex flex-wrap -mx-3 mb-6">
         <div class="w-full px-3">
             <label for="category" class="block pb-3 font-body font-medium text-primary dark:text-white">
