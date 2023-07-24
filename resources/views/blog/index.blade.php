@@ -30,17 +30,20 @@
                 <div class="pt-8 lg:pt-12">
                     @foreach($posts as $post)
                         <article class="border-b border-grey-lighter pb-8 mt-5">
-                        <span
-                            class="mb-4 inline-block rounded-full bg-green-light px-2 py-1 font-body text-sm text-green">{{$post->slug}}</span>
+
+                            @foreach($post->tags as $tag)
+                                <span class="mb-4 inline-block rounded-full bg-green-light px-2 py-1 font-body text-sm text-green">{{$tag->name}}</span>
+                            @endforeach
                             <a
                                 href="{{ route("blog.show", ['slug' => $post->slug, 'post'=>$post]) }}"
                                 class="block font-body text-lg font-semibold text-primary transition-colors hover:text-green dark:text-white dark:hover:text-secondary"
                             >{{ $post->title }}</a
                             >
                             <div class="flex items-center pt-4">
-                                <p class="pr-2 font-body font-light text-primary dark:text-white">
-                                    {{$post->created_at->monthName }}
-                                </p>
+                                    <p class="pr-2 font-body font-light text-primary dark:text-white">
+                                        {{$post->created_at->monthName}}
+                                    </p>
+
                                 <span class="font-body text-grey dark:text-white">//</span>
                                 <p class="pl-2 font-body font-light text-primary dark:text-white">
                                     4 min read

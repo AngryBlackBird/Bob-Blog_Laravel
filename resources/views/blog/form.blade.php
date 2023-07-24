@@ -4,7 +4,7 @@
         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
                 class="block pb-3 font-body font-medium text-primary dark:text-white"
-                   for="post-tile">
+                for="post-tile">
                 Titre
             </label>
             <input
@@ -18,7 +18,7 @@
         <div class="w-full md:w-1/2 px-3">
             <label
                 class="block pb-3 font-body font-medium text-primary dark:text-white"
-                   for="post-slug">
+                for="post-slug">
                 Slug
             </label>
             <input
@@ -34,13 +34,32 @@
         <div class="w-full px-3">
             <label
                 class="block pb-3 font-body font-medium text-primary dark:text-white"
-                   for="blog-content">
-                Contenue
+                for="blog-content">
+                Contenu
             </label>
             <textarea
                 class="w-full border border-primary bg-grey-lightest px-5 py-4 font-body font-light text-primary placeholder-primary transition-colors focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary dark:text-white"
                 id="blog-content" name="content">{{@old('content', $post->content)}}</textarea>
             @error("content")
+            <p class="text-red-600 text-xs italic">{{$message}}</p>
+            @enderror
+        </div>
+    </div>
+    @php
+        $tagIds = $post->tags()->pluck("id");
+    @endphp
+    <div class="flex flex-wrap -mx-3 mb-6">
+        <div class="w-full px-3">
+            <label for="tag_mutiple" class="block pb-3 font-body font-medium text-primary dark:text-white">
+                Tags (multiple choix)
+            </label>
+            <select multiple id="tag_mutiple" name="tags[]"
+                    class="w-full border border-primary bg-grey-lightest px-5 py-4 font-body font-light text-primary placeholder-primary transition-colors focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary dark:text-white">
+                @foreach($tags as $tag)
+                    <option @selected($tagIds->contains($tag->id)) value="{{$tag->id}}">{{$tag->name}}</option>
+                @endforeach
+            </select>
+            @error("tags")
             <p class="text-red-600 text-xs italic">{{$message}}</p>
             @enderror
         </div>

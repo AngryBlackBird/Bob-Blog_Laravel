@@ -25,9 +25,9 @@ class BlogController extends Controller
 //            ["name" => "Tag 2 "],
 //        ]);
 //        $post->save();
-        dd($post->tags);
+//        dd($post->tags);
 
-        $posts = Post::paginate(2);
+        $posts = Post::paginate(5);
         return view("blog.index", ["posts" => $posts]);
     }
 
@@ -48,13 +48,17 @@ class BlogController extends Controller
 
     public function edit(string $slug, Post $post): View
     {
-        return \view("blog.create", ["post" => $post]);
+        return \view("blog.create", [
+            "post" => $post,
+            "tags"=> \App\Models\Tag::select("id", "name")->get(),
+        ]);
 
     }
 
     public function update(CreatePostRequest $request, string $slug, Post $post): RedirectResponse
     {
         $post->update($request->validated());
+        $post->tags()->sync($request->validated('tags'));
         return redirect()->route('blog.show', ["slug" => $post->slug, 'post' => $post])->with("success", "Article bien modifié");
     }
 
